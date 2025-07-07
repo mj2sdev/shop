@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{ layouts/base }">
+
+<head>
+	<title>HOME</title>
+</head>
+
+<body>
+	<main layout:fragment="content">
+		
+		<!-- slide -->
+		<th:block th:replace="~{ fragments/slider }" />
+
+		<!-- main content -->
+		<div class="container">
+			<div class="row">
+				<div class="col s3">
+					<h2 class="text-3xl my-20">CATEGORY</h2>
+					<ul class="collapsible">
+						<li class="active">
+							<div class="collapsible-header">
+								<i class="material-icons">arrow_forward</i>
+								<span>MAN</span>
+							</div>
+							<div class="collapsible-body">
+								<span>
+									<ul>
+										Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad, unde aut quo soluta aliquam doloribus fuga, aspernatur tenetur eligendi beatae accusantium facilis pariatur, ratione similique quas in nihil magnam minima!
+									</ul>
+								</span>
+							</div>
+						</li>
+						<li>
+							<div class="collapsible-header">
+								<i class="material-icons">arrow_forward</i>
+								<span>WOMAN</span>
+							</div>
+							<div class="collapsible-body">
+								<span>
+									<ul>
+										Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad, unde aut quo soluta aliquam doloribus fuga, aspernatur tenetur eligendi beatae accusantium facilis pariatur, ratione similique quas in nihil magnam minima!
+									</ul>
+								</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="col s8">
+					<h2 class="text-3xl my-20">NEW PRODUCT</h2>
+					<div class="grid grid-cols-3 gap-4">
+
+						<!-- card template -->
+						<div class="card hoverable" th:each="item : ${#numbers.sequence(1, 11)}">
+							<div class="card-image">
+								<img src="">
+								<span class="card-title" text=""></span>
+							</div>
+							<div class="card-content">
+								<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At, dolore? Nemo dolorem magni modi quia illo similique! Vitae, similique inventore doloremque quidem architecto pariatur reprehenderit, nihil dolorem, voluptatibus optio soluta!</p>
+							</div>
+							<div class="card-action">
+								<a href="">상세보기</a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</main>
+</body>
+
+</html>

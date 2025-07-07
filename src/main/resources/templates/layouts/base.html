@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<th:block th:replace="~{ fragments/resource }" />
+	<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">SHOP</title>
+</head>
+<body class="flex flex-col h-dvh">
+	<header th:replace="~{ fragments/header }"></header>
+	<div class="flex-grow" layout:fragment="content"></div>
+	<footer th:replace="~{ fragments/footer }"></footer>
+</body>
+</html>
