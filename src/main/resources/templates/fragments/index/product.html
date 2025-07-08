@@ -1,0 +1,23 @@
+<h2 class="text-3xl my-20">
+  <span th:if="${kind == '1'}">MAN</span>
+  <span th:if="${kind == '2'}">WOMAN</span>
+  <span th:if="${kind != '1' and kind != '2'}">NEW PRODUCT</span>
+</h2>
+<div class="grid grid-cols-3 gap-4 mt-[-.5rem]">
+
+	<!-- card template -->
+	<div class="card hoverable" th:each="item : ${ list }">
+		<div class="card-image">
+			<img th:src="@{'http://192.168.30.5:8081/uploads/'+${item.image}}">
+			<span class="card-title"></span>
+		</div>
+		<div class="card-content">
+			<p class="truncate" th:text="${ item.name }"></p>
+			<p class="truncate" th:text="${ #numbers.formatInteger(item.price2, 3, 'COMMA') }"></p>
+		</div>
+		<div class="card-action">
+			<a th:href="@{'/product/detail/' + ${ item.pseq }}">상세보기</a>
+		</div>
+	</div>
+
+</div>

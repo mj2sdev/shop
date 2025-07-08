@@ -1,0 +1,57 @@
+<h2 class="text-3xl my-20">DETAIL</h2>
+
+<div class="card horizontal hoverable">
+	<div class="card-image shrink-0 w-80">
+		<img class="w-full h-full" th:src="@{ 'http://192.168.30.5:8081/uploads/' + ${ item.image } }">
+	</div>
+	<div class="card-stacked">
+		<div class="card-content">
+			<h2 class="text-4xl">
+				<span>상품명 : </span>
+				<span th:text="${ item.name }"></span>
+			</h2>
+			<div>
+				<span>가격 : </span>
+				<span th:text="${#numbers.formatInteger(item.price2, 3, 'COMMA') + '원'}"></span>
+			</div>
+			<div class="my-2">
+				<button class="btn wave-effect">-</button>
+				<span class="mx-4">1</span>
+				<button class="btn wave-effect">+</button>
+			</div>
+			<div>
+				<span>총</span>
+				<span>1</span>
+				<span>개</span>
+				<span class="text-3xl text-red-500">1,000</span>
+				<span>원</span>
+			</div>
+		</div>
+		<div class="card-action">
+			<div class="flex gap-2">
+				<button class="btn wave-effect">장바구니 담기</button>
+				<button class="btn wave-effect">구매하기</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col s12">
+		<ul class="tabs tabs-fixed-width tab-demo z-depth-1">
+			<li class="tab col s2"><a href="#info" class="active">상품정보</a></li>
+			<li class="tab col s2"><a href="#review">상품후기</a></li>
+			<li class="tab col s2"><a href="#qna">질문/답변</a></li>
+		</ul>
+	</div>
+	<div id="info" class="col s12">
+		<img class="w-full" th:src="@{'http://192.168.30.5:8081/uploads/' + ${ item.image }}">
+	</div>
+	<div id="review" class="col s12">
+		<h1 class="text-center mh-2">여기에는 상품 후기 공간입니다.</h1>
+	</div>
+	<div id="qna" class="col s12">
+		<h2 class="text-center mh-2">여기는 질문 및 답변 공간입니다.</h2>
+	</div>
+</div>
