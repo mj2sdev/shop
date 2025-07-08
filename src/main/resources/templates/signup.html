@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{ layouts/base }">
+
+<head>
+	<title>HOME</title>
+</head>
+
+<body>
+	<main layout:fragment="content">
+		<div class="flex h-full justify-center items-center">
+
+			<form class="card" th:action="@{/signup}" method="post" th:object="${account}">
+				<div class="card-content">
+					<div class="card-title">
+						<h2 class="text-center">SIGNUP</h2>
+					</div>
+					<div class="row max-w-96">
+						<div class="col s12 input-field">
+							<input id="writer" th:field="*{writer}" type="text" required>
+							<label for="writer">writer</label>
+						</div>
+						<div class="col s12 input-field">
+							<input id="username" th:field="*{userid}" type="text" required>
+							<label for="username">username</label>
+						</div>
+						<div class="col s12 input-field">
+							<input id="password" th:field="*{password}" type="password" required>
+							<label for="password">password</label>
+						</div>
+						<div class="col s12 input-field">
+							<input type="password" id="password2" required
+							title="비밀번호가 일치하지 않습니다.">
+							<label for="password2">password repeat</label>
+						</div>
+						<div class="col s12 input-field">
+							<input id="email" th:field="*{email}" type="email" required>
+							<label for="email">email</label>
+						</div>
+						<div class="col s12 input-field">
+							<input id="phone" th:field="*{phone}" type="text" required>
+							<label for="phone">phone</label>
+						</div>
+						<button class="btn wave-effect wave-light w-full" type="submit">
+							<span>회원가입</span>
+						</button>
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</main>
+</body>
+
+</html>

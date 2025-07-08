@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{ layouts/base }">
+
 <head>
 	<title>HOME</title>
 </head>
+
 <body>
 	<main layout:fragment="content">
 		<div class="flex h-full justify-center items-center">
@@ -15,7 +15,7 @@
 					<div class="card-title">
 						<h2 class="text-center">ログイン</h2>
 					</div>
-					<div class="row">
+					<div class="row max-w-96">
 						<div class="col s12 input-field">
 							<input id="username" name="username" type="text" required>
 							<label for="">ユーザーネーム</label>
@@ -28,11 +28,11 @@
 							<span>ログイン</span>
 						</button>
 						<div th:if="${param.error}">
-    <p style="color: red;">로그인 실패</p>
-  </div>
-  <div th:if="${param.logout}">
-    <p style="color: green;">로그아웃 성공</p>
-  </div>
+							<p class="text-red-500">로그인 실패</p>
+						</div>
+						<div th:if="${param.logout}">
+							<p class="text-green-500">로그아웃 성공</p>
+						</div>
 					</div>
 				</div>
 			</form>
@@ -40,4 +40,5 @@
 		</div>
 	</main>
 </body>
+
 </html>

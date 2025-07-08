@@ -19,9 +19,8 @@ public class MainController {
 
 	@GetMapping
 	public String index(Model model) {
-		try {
-		model.addAttribute("list", productRepo.findAll());
-		} catch(Exception e) {}
+		var list = productRepo.findTop5ByOrderByIndateDesc();
+		model.addAttribute("list", list);
 		return "index";
 	}
 	
