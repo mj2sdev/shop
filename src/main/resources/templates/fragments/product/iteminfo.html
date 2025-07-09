@@ -14,23 +14,24 @@
 				<span>가격 : </span>
 				<span th:text="${#numbers.formatInteger(item.price2, 3, 'COMMA') + '원'}"></span>
 			</div>
-			<div class="my-2">
-				<button class="btn wave-effect">-</button>
-				<span class="mx-4">1</span>
-				<button class="btn wave-effect">+</button>
+			<div class="my-2" onclick="counter(event)">
+				<button class="btn waves-effect waves-light" data-value="-1">-</button>
+				<span class="mx-4 count">1</span>
+				<button class="btn waves-effect waves-light" data-value="1">+</button>
 			</div>
 			<div>
+				<div class="price" hidden th:text="${ item.price2 }"></div>
 				<span>총</span>
 				<span>1</span>
 				<span>개</span>
-				<span class="text-3xl text-red-500">1,000</span>
+				<span class="text-3xl text-red-500 total-value" th:text="${#numbers.formatInteger(item.price2, 3, 'COMMA')}"></span>
 				<span>원</span>
 			</div>
 		</div>
 		<div class="card-action">
 			<div class="flex gap-2">
-				<button class="btn wave-effect">장바구니 담기</button>
-				<button class="btn wave-effect">구매하기</button>
+				<button class="btn waves-effect waves-light">장바구니 담기</button>
+				<button class="btn waves-effect waves-light">구매하기</button>
 			</div>
 		</div>
 	</div>
