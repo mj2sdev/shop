@@ -1,0 +1,50 @@
+<h2 class="text-3xl my-20">
+  <span th:if="${kind == '1'}">MAN</span>
+  <span th:if="${kind == '2'}">WOMAN</span>
+  <span th:if="${kind != '1' and kind != '2'}">NEW PRODUCT</span>
+</h2>
+
+<!-- table template -->
+<div class="card hoverable">
+	<div class="card-content">
+		<table class="striped highlight">
+			<thead>
+				<tr>
+					<th></th>
+					<th>number</th>
+					<th>thumbnail</th>
+					<th>name</th>
+					<th>createAt</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="item : ${ list }">
+					<td>
+						<p>
+							<label>
+								<input type="checkbox" th:value="${ item.id }" />
+								<span></span>
+							</label>
+						</p>
+					</td>
+					<td>
+						<div th:text="${ item.id }"></div>
+					</td>
+					<td>
+						<div class="h-[3rem] aspect-square">
+							<img th:src="${ item.thumbnail }">
+						</div>
+					</td>
+					<td>
+						<a th:href="@{'/admin/product/' + ${ item.id }}">
+							<div class="w-full" th:text="${ item.name }"></div>
+						</a>
+					</td>
+					<td>
+						<div th:text="${ #temporals.format(item.createAt, 'yyyy-mm-dd HH:mm:ss') }"></div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

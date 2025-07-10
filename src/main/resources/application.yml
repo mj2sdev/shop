@@ -7,19 +7,28 @@ spring:
       name: admin
       password: 1234
 
+  # datasource:
+  #   url: jdbc:oracle:thin:@192.168.30.5:1521:XE
+  #   username: jsl22
+  #   password: 1234
+  #   driver-class-name: oracle.jdbc.OracleDriver
   datasource:
-    url: jdbc:oracle:thin:@192.168.30.5:1521:XE
+    url: jdbc:mariadb://localhost:3306/shop
     username: jsl22
     password: 1234
-    driver-class-name: oracle.jdbc.OracleDriver
+    driver-class-name: org.mariadb.jdbc.Driver
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.OracleDialect
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        dialect: org.hibernate.dialect.MariaDBDialect
   
   config:
     import:

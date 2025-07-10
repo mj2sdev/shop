@@ -3,14 +3,14 @@
 	layout:decorate="~{ layouts/base }">
 
 <head>
-	<title>HOME</title>
+	<title>LOGIN</title>
 </head>
 
 <body>
 	<main layout:fragment="content">
 		<div class="flex h-full justify-center items-center">
 
-			<form class="card" th:action="@{/login}" method="post">
+			<form class="card hoverable" th:action="@{/login}" method="post">
 				<div class="card-content">
 					<div class="card-title">
 						<h2 class="text-center">ログイン</h2>
@@ -27,11 +27,13 @@
 						<button class="btn wave-effect wave-light w-full" type="submit">
 							<span>ログイン</span>
 						</button>
-						<div th:if="${param.error}">
-							<p class="text-red-500">로그인 실패</p>
-						</div>
-						<div th:if="${param.logout}">
-							<p class="text-green-500">로그아웃 성공</p>
+						<div class="mt-4">
+							<div th:if="${param.error}">
+								<p class="text-red-500">로그인 실패</p>
+							</div>
+							<div th:if="${param.logout}">
+								<p class="text-green-500">로그아웃 성공</p>
+							</div>
 						</div>
 					</div>
 				</div>

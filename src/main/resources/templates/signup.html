@@ -3,29 +3,25 @@
 	layout:decorate="~{ layouts/base }">
 
 <head>
-	<title>HOME</title>
+	<title>SIGNUP</title>
 </head>
 
 <body>
 	<main layout:fragment="content">
 		<div class="flex h-full justify-center items-center">
 
-			<form class="card" th:action="@{/signup}" method="post" th:object="${account}">
+			<form class="card hoverable" th:action="@{/signup}" method="post" th:object="${account}">
 				<div class="card-content">
 					<div class="card-title">
 						<h2 class="text-center">SIGNUP</h2>
 					</div>
 					<div class="row max-w-96">
 						<div class="col s12 input-field">
-							<input id="writer" th:field="*{writer}" type="text" required>
-							<label for="writer">writer</label>
-						</div>
-						<div class="col s12 input-field">
-							<input id="username" th:field="*{userid}" type="text" required>
+							<input id="username" th:field="*{username}" type="text" required>
 							<label for="username">username</label>
 						</div>
 						<div class="col s12 input-field">
-							<input id="password" th:field="*{password}" type="password" required>
+							<input id="password" th:field="*{password}" type="password" required onblur="passwordPattern(this)">
 							<label for="password">password</label>
 						</div>
 						<div class="col s12 input-field">
@@ -47,7 +43,6 @@
 					</div>
 				</div>
 			</form>
-
 		</div>
 	</main>
 </body>

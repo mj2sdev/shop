@@ -31,7 +31,7 @@ public class MainController {
 
 	@GetMapping
 	public String index(Model model) {
-		var list = productRepo.findTop5ByOrderByIndateDesc();
+		var list = productRepo.findTop5ByOrderByCreateAtDesc();
 		model.addAttribute("list", list);
 
 		return "index";

@@ -17,22 +17,13 @@ public class ProductController {
 
 	private final ProductRepo productRepo;
 
-	@GetMapping("man")
-	String man(Model model) {
-		String kind = "1"; // man
-		var list = productRepo.findAllByKind(kind);
-		model.addAttribute("list", list)
-			.addAttribute("kind", kind);
-
-		return "product";
-	}
-
-	@GetMapping("woman")
-	String woman(Model model) {
-		String kind = "2"; // man
-		var list = productRepo.findAllByKind(kind);
-		model.addAttribute("list", list)
-			.addAttribute("kind", kind);
+	@GetMapping("{gender:man|woman}")
+	String man(@PathVariable("gender") String gender, Model model) {
+		Integer category = gender.equals("man") ? 1 : 2;
+		var list = productRepo.findAllByCategory(category);
+		model
+			.addAttribute("list", list)
+			.addAttribute("type", category);
 
 		return "product";
 	}

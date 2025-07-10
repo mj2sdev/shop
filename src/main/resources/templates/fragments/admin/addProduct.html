@@ -1,0 +1,95 @@
+<h2 class="text-3xl my-20">
+  <span>ADD PROUDCT</span>
+</h2>
+<div class="card hoverable">
+  <div class="card-content">
+
+    <form class="row" method="post" th:action="@{/admin/product/add}" th:object="${product}">
+      
+      <div class="input-field col s6">
+        <input 
+        type="text" 
+        class="validate" 
+        id="name" 
+        placeholder="name" 
+        th:field="*{name}" 
+        required>
+        <label for="name">product name</label>
+      </div>
+      
+      <div class="input-field col s6">
+        <select>
+          <option value="" disabled selected>選択</option>
+          <option value="1">男性</option>
+          <option value="2">女性</option>
+        </select>
+        <label>category</label>
+      </div>
+      
+      <div class="input-field col s4">
+        <input
+        class="validate"
+        type="number" 
+        name="originPrice" 
+        id="originPrice" 
+        placeholder="1,000"
+        onkeyup="calProfit(event)"
+        required>
+        <label for="originPrice">originPrice</label>
+      </div>
+      
+      <div class="input-field col s4">
+        <input 
+        class="validate"
+        type="number" 
+        name="salesPrice" 
+        id="salesPrice" 
+        placeholder="1,000"
+        onkeyup="calProfit(event)"
+        required>
+        <label for="salesPrice">salesPrice</label>
+      </div>
+      
+      <div class="input-field col s4">
+        <input 
+        class="validate"
+        type="text" 
+        id="profit" 
+        placeholder="1,000" 
+        value="0" 
+        disabled>
+        <label for="profit">profit</label>
+      </div>
+      
+      <div class="col s12">
+        <div
+          data-name="content"
+          class="h-[20rem] p-4 quill">
+        </div>
+        <input type="hidden" th:field="*{content}" name="content">
+      </div>
+    
+    <div class="col s12">
+      <div class="input-field">
+        <input 
+        class="validate"
+        type="text" 
+        name="image" 
+        id="image" 
+        placeholder="" 
+        required 
+        th:field="*{thumbnail}"
+        onblur="uploadThumbnail(event)">
+        <label for="image">image URL</label>
+      </div>
+      <div class="thumbnail bg-cover w-[20rem] aspect-square hoverable border border-gray-300"></div>
+    </div>
+    
+    <div class="col s12 mt-4 text-right">
+      <button class="btn waves-effect" type="submit">ADD</button>
+      <a href="/admin" class="btn waves-effect" >CANCEL</a>
+    </div>
+    
+  </form>
+</div>
+</div>

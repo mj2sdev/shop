@@ -1,25 +1,21 @@
 package io.mj2sdev.shop.model;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Entity
-public class Product {
-	
-	@Id
-	private Integer pseq;
-	private String name;
-	private String kind;
-	private Integer price1;
-	private Integer price2;
-	private Integer price3;
+public class Product extends Common {
+	@Lob
 	private String content;
-	private String image;
-	private boolean useyn;
-	private boolean bestyn;
-	private LocalDateTime indate;
+	private String name;
+	private String thumbnail;
+	private Integer category;
+	private Integer originPrice;
+	private Integer salesPrice;
+	private Boolean isCarrot;
+	private Boolean isNugu;
 }

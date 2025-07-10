@@ -30,3 +30,50 @@ function counter(event) {
 	countElement.innerHTML = count;
 	totalValue.innerHTML = count * price;
 }
+
+function passwordPattern(element) {
+	document.querySelector("#password2").pattern = element.value;
+}
+
+document.querySelectorAll(".quill").forEach(item => {
+	const editors = window.editors || [];
+	const quill = new Quill(item, { theme: "snow" });
+	const { root } = quill;
+	const { name } = item.dataset;
+	const quillInputElement = document.querySelector(`[name=${name}]`);
+	editors.push(quill);
+	window.editors = editors;
+
+	root.onblur = () => {
+		if (quillInputElement) quillInputElement.value = quill.root.innerHTML;
+	}
+})
+
+async function uploadThumbnail(event) {
+	const { target } = event;
+	const { value } = target;
+	const thumbnailElement = document.querySelector(".thumbnail");
+	let image = value;
+	console.log(image);
+
+	if (value.includes("picsum")) {
+		const response = await fetch(value, {
+			method: "GET",
+			redirect: "manual",
+		})
+		console.log(response);
+		image = response.headers.get("Location");
+	}
+	thumbnailElement.style.backgroundImage = `url('${image}')`;
+	window.temp = thumbnailElement;
+}
+
+function calProfit(event) {
+	const originPrice = document.querySelector("#originPrice").value;
+	const salesPrice = document.querySelector("#salesPrice").value;
+	const profitElement = document.querySelector("#profit");
+
+	if (!originPrice || !salesPrice) return;
+	
+	profitElement.value = (+originPrice - +salesPrice).toLocaleString();
+}

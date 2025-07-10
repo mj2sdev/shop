@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{ layouts/base }">
+
+<head>
+	<title>PRODUCT - ADD</title>
+</head>
+
+<body>
+	<main layout:fragment="content">
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col s3">
+
+					<th:block th:replace="~{ fragments/admin/category }" />
+
+				</div>
+				<div class="col s8">
+
+					<th:block th:replace="~{ fragments/admin/addProduct }" />
+
+				</div>
+			</div>
+
+		</div>
+
+	</main>
+</body>
+
+</html>

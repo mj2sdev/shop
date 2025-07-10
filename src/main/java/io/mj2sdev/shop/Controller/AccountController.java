@@ -1,6 +1,6 @@
 package io.mj2sdev.shop.controller;
 
-import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
-public class MemberController {
+public class AccountController {
 
 	private final AccountRepo accountRepo;
+
+	private final PasswordEncoder passwordEncoder;
 	
 	@GetMapping("login")
 	public String login() {
@@ -34,15 +36,14 @@ public class MemberController {
 
 	@PostMapping("signup")
 	String signup(@ModelAttribute Account account, RedirectAttributes redirectAttributes) {
-		String salt = BCrypt.gensalt();
 		String rawPassword = account.getPassword();
-		String cryptedPassword = BCrypt.hashpw(rawPassword, salt);
+		String cryptedPassword = passwordEncoder.encode(rawPassword);
 		account.setPassword(cryptedPassword);
 		Account saved = accountRepo.save(account);
 		
-		boolean result = saved.getUserid() != null;
+		boolean result = saved.getUsername() != null;
 		redirectAttributes.addAttribute("result", result);
 		
-		return "redirect:/";
+		return "redirect:/signup";
 	}
 }

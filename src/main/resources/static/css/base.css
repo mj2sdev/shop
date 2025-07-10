@@ -1,1 +1,39 @@
 @charset "utf8";
+.btn {
+  background-color: #ee6e73 !important;
+  color: #fff !important;
+}
+
+.btn:hover {
+  background-color: #d94c52 !important;
+}
+
+.input-field input:focus + label {
+  color: #ee6e73 !important; /* 버튼색 #ee6e73에 맞춘 핑크 */
+}
+
+.input-field input:focus {
+  border-bottom: 1px solid #ee6e73 !important; /* 밑줄도 핑크로 */
+  box-shadow: 0 1px 0 0 #ee6e73 !important;    /* 밑줄 그림자도 핑크 */
+}
+
+.dropdown-content li > a {
+  color: #ee6e73 !important; /* 텍스트 색 */
+}
+
+.dropdown-content li > a:hover, 
+.dropdown-content li > a.active {
+  background-color: #ee6e73 !important; /* 배경색 */
+  color: #fff !important;               /* 글자 하얗게 */
+}
+
+/* 체크박스 체크 시 핑크색 (#ee6e73) 적용 */
+input[type="checkbox"]:checked + span:before {
+  border-right: 2px solid #ee6e73 !important;
+  border-bottom: 2px solid #ee6e73 !important;
+}
+
+input[type="checkbox"].filled-in:checked + span:not(.lever):after {
+  border-right: 2px solid #ee6e73 !important;
+  border-bottom: 2px solid #ee6e73 !important;
+}
