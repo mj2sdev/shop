@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import io.mj2sdev.shop.model.Product;
 
 @Repository
-public interface ProductRepo extends JpaRepository<Product, Integer> {
+public interface ProductRepo extends JpaRepository<Product, Long> {
 
-	public List<Product> findTop5ByOrderByCreateAtDesc();
+	public List<Product> findTop5ByOrderByCreatedAtDesc();
 
 	public List<Product> findAllByCategory(Integer Category);
 	

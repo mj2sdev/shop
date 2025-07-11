@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{ layouts/base }">
+<head>
+	<title>HOME</title>
+</head>
+<body>
+	<main layout:fragment="content">
+		<h1>hello world</h1>
+		<div th:text="${ list.size() }"></div>
+		<div th:each="item : ${ list }">
+			<span th:text="${ item.account?.username }"></span>
+		</div>
+	</main>
+</body>
+</html>

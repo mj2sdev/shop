@@ -56,7 +56,7 @@ async function uploadThumbnail(event) {
 	let image = value;
 	console.log(image);
 
-	if (value.includes("picsum")) {
+	if (value.includes("//picsum.photos")) {
 		const response = await fetch(value, {
 			method: "GET",
 			redirect: "manual",

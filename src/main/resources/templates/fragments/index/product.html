@@ -8,15 +8,15 @@
 	<!-- card template -->
 	<div class="card hoverable" th:each="item : ${ list }">
 		<div class="card-image">
-			<img th:src="@{'http://192.168.30.5:8081/uploads/'+${item.image}}">
+			<img th:src="${ item.thumbnail }">
 			<span class="card-title"></span>
 		</div>
 		<div class="card-content">
 			<p class="truncate" th:text="${ item.name }"></p>
-			<p class="truncate" th:text="${ #numbers.formatInteger(item.price2, 3, 'COMMA') }"></p>
+			<p class="truncate" th:text="${ #numbers.formatInteger(item.salesPrice, 3, 'COMMA') }"></p>
 		</div>
 		<div class="card-action">
-			<a th:href="@{'/product/detail/' + ${ item.pseq }}">상세보기</a>
+			<a th:href="@{'/product/detail/' + ${ item.id }}">상세보기</a>
 		</div>
 	</div>
 
