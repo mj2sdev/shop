@@ -12,6 +12,8 @@
 		<div th:text="${ list.size() }"></div>
 		<div th:each="item : ${ list }">
 			<span th:text="${ item.account?.username }"></span>
+			<span th:text="${ item.product?.name? }"></span>
+			<span th:text="${ item.product?.price? }"></span>
 		</div>
 	</main>
 </body>
