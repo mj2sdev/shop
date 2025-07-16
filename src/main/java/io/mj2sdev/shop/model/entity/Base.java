@@ -1,4 +1,4 @@
-package io.mj2sdev.shop.model;
+package io.mj2sdev.shop.model.entity;
 
 import java.time.LocalDateTime;
 
@@ -16,7 +16,7 @@ import lombok.Getter;
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class Common {
+public abstract class Base {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

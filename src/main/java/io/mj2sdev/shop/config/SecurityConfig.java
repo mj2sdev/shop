@@ -25,6 +25,9 @@ public class SecurityConfig {
 				.permitAll()
 			)
 			.logout(logout -> logout
+				.logoutUrl("/logout")
+				.invalidateHttpSession(true)
+				.clearAuthentication(true)
 				.logoutSuccessUrl("/login?logout")
 				.permitAll()
 			);

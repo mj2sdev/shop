@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import io.mj2sdev.shop.model.Account;
-import io.mj2sdev.shop.model.Cart;
+import io.mj2sdev.shop.model.entity.Account;
+import io.mj2sdev.shop.model.entity.Cart;
 
 @Repository
 public interface AccountRepo extends JpaRepository<Account, Long>{

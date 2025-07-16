@@ -8,11 +8,11 @@
   background-color: #d94c52 !important;
 }
 
-.input-field input:focus + label {
+* input:focus + label {
   color: #ee6e73 !important; /* 버튼색 #ee6e73에 맞춘 핑크 */
 }
 
-.input-field input:focus {
+* input:focus {
   border-bottom: 1px solid #ee6e73 !important; /* 밑줄도 핑크로 */
   box-shadow: 0 1px 0 0 #ee6e73 !important;    /* 밑줄 그림자도 핑크 */
 }

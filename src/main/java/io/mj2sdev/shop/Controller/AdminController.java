@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import io.mj2sdev.shop.model.Product;
+import io.mj2sdev.shop.model.dto.ProductDTO;
+import io.mj2sdev.shop.model.entity.Product;
 import io.mj2sdev.shop.repository.ProductRepo;
 import lombok.RequiredArgsConstructor;
 
@@ -25,21 +26,27 @@ public class AdminController {
 	
 	@GetMapping
 	String admin(Model model) {
-		var list = productRepo.findAll();
-		model.addAttribute("list", list);
+		List<Product> entities = productRepo.findAll();
+		List<ProductDTO> dtos = entities
+			.stream()
+			.map(entity -> new ProductDTO(entity))
+			.toList();
+		
+		model.addAttribute("list", dtos);
 
 		return "admin";
 	}
 
 	@GetMapping("product/add")
 	String addProduct(Model model) {
-		model.addAttribute("product", new Product());
+		model.addAttribute("product", new ProductDTO());
 		return "addProduct";
 	}
 
 	@PostMapping("product/add")
-	public String addProduct(@ModelAttribute Product product, RedirectAttributes attributes) {
-		Product saved = productRepo.save(product);
+	public String addProduct(@ModelAttribute ProductDTO product, RedirectAttributes attributes) {
+		Product entity = product.toEntity();
+		Product saved = productRepo.save(entity);
 
 		attributes.addAttribute("result", saved != null);
 

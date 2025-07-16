@@ -4,7 +4,12 @@
 <div class="card hoverable">
   <div class="card-content">
 
-    <form class="row" method="post" th:action="@{/admin/product/add}" th:object="${product}">
+    <form
+      class="row"
+      method="post"
+      th:action="@{/admin/product/add}"
+      th:object="${product}"
+      enctype="multipart/form-data">
       
       <div class="input-field col s6">
         <input 
@@ -70,19 +75,17 @@
       </div>
     
     <div class="col s12">
-      <div class="input-field">
-        <input 
-        class="validate"
-        type="text" 
-        name="image" 
-        id="image" 
-        placeholder="" 
-        required 
-        th:field="*{thumbnail}"
-        onblur="uploadThumbnail(event)">
-        <label for="image">image URL</label>
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>IMAGE</span>
+          <input type="file" accept="image/*" onchange="">
+        </div>
+        <div class="file-path-wrapper">
+          <input type="text" class="file-path validate"
+            placeholder="thumbnail image">
+        </div>
       </div>
-      <div class="thumbnail bg-cover w-[20rem] aspect-square hoverable border border-gray-300"></div>
+      <div hidden class="thumbnail bg-cover w-[20rem] aspect-square hoverable border border-gray-300"></div>
     </div>
     
     <div class="col s12 mt-4 text-right">

@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import io.mj2sdev.shop.model.Account;
+import io.mj2sdev.shop.model.entity.Account;
 import io.mj2sdev.shop.repository.AccountRepo;
 import lombok.RequiredArgsConstructor;
 

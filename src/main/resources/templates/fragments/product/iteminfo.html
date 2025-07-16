@@ -2,36 +2,68 @@
 
 <div class="card horizontal hoverable">
 	<div class="card-image shrink-0 w-80">
-		<img class="w-full h-full" th:src="@{ 'http://192.168.30.5:8081/uploads/' + ${ item.image } }">
+		<img class="w-full h-full" th:src="@{ 'http://192.168.30.5:8081/uploads/' + ${ item.thumbnail } }">
 	</div>
 	<div class="card-stacked">
 		<div class="card-content">
-			<h2 class="text-4xl">
-				<span>상품명 : </span>
-				<span th:text="${ item.name }"></span>
-			</h2>
-			<div>
-				<span>가격 : </span>
-				<span th:text="${#numbers.formatInteger(item.price2, 3, 'COMMA') + '원'}"></span>
-			</div>
-			<div class="my-2" onclick="counter(event)">
-				<button class="btn waves-effect waves-light" data-value="-1">-</button>
-				<span class="mx-4 count">1</span>
-				<button class="btn waves-effect waves-light" data-value="1">+</button>
-			</div>
-			<div>
-				<div class="price" hidden th:text="${ item.price2 }"></div>
-				<span>총</span>
-				<span>1</span>
-				<span>개</span>
-				<span class="text-3xl text-red-500 total-value" th:text="${#numbers.formatInteger(item.price2, 3, 'COMMA')}"></span>
-				<span>원</span>
-			</div>
+			<form th:action="@{/product/cart/add/${ item.id }}" method="post">
+				<h2 class="text-4xl">
+					<span>상품명 : </span>
+					<span th:text="${ item.name }"></span>
+				</h2>
+				<div>
+					<span>가격 : </span>
+					<span th:text="${#numbers.formatInteger(item.salesPrice, 3, 'COMMA') + '원'}"></span>
+				</div>
+				<div class="my-2 flex items-center gap-4" onclick="counter(event)">
+					<div data-value="-1">
+						<button 
+							class="btn waves-effect waves-light p-0"
+							type="button">
+							<i class="material-icons mx-4"≈>remove</i>
+						</button>
+					</div>
+					<div class="w-[5rem]">
+						<input
+							class="text-center !pl-2"
+							type="number"
+							min="1"
+							readonly
+							id="count"
+							value="1">
+					</div>
+					<div data-value="1">
+						<button 
+							type="button"
+							class="btn waves-effect waves-light ml-2 p-0">
+							<i class="material-icons mx-4">add</i>
+						</button>
+					</div>
+				</div>
+				<div>
+					<div
+						id="price"
+						th:text="${ item.salesPrice }"
+						hidden>
+					</div>
+					<div id="id" th:text="${ item.id }" hidden>
+					</div>
+					<span>총</span>
+					<span id="totalCount">1</span>
+					<span>개</span>
+					<span
+						id="totalPrice"
+						class="text-3xl text-red-500 total-value"
+						th:text="${#numbers.formatInteger(item.salesPrice, 3, 'COMMA')}"></span>
+					<span>원</span>
+				</div>
+
+			</form>
 		</div>
 		<div class="card-action">
 			<div class="flex gap-2">
-				<button class="btn waves-effect waves-light">장바구니 담기</button>
-				<button class="btn waves-effect waves-light">구매하기</button>
+				<button class="btn waves-effect waves-light" onclick="addCart()">장바구니 담기</button>
+				<button class="btn waves-effect waves-light" data-toast="너무 다이렉트 한거 아냐?">구매하기</button>
 			</div>
 		</div>
 	</div>
@@ -46,13 +78,23 @@
 			<li class="tab col s2"><a href="#qna">질문/답변</a></li>
 		</ul>
 	</div>
+
 	<div id="info" class="col s12">
-		<img class="w-full" th:src="@{'http://192.168.30.5:8081/uploads/' + ${ item.image }}">
+		<img class="w-full" th:src="@{'http://192.168.30.5:8081/uploads/' + ${ item.thumbnail }}">
 	</div>
+
 	<div id="review" class="col s12">
-		<h1 class="text-center mh-2">여기에는 상품 후기 공간입니다.</h1>
+		<div class="card hoverable" th:each="review : ${ reviews }">
+			<div class="card-content">
+				<p th:text="${ review.id }"></p>
+				<h1 th:text="${ review.title }"></h1>
+				<p th:text="${ review.content }"></p>
+			</div>
+		</div>
 	</div>
+
 	<div id="qna" class="col s12">
 		<h2 class="text-center mh-2">여기는 질문 및 답변 공간입니다.</h2>
 	</div>
+
 </div>

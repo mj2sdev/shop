@@ -41,14 +41,14 @@
 						</a>
 					</td>
 					<td>
-						<div th:text="${ #temporals.format(item.createAt, 'yyyy-mm-dd HH:mm:ss') }"></div>
+						<div th:text="${ #temporals.format(item.createdAt, 'yyyy-mm-dd HH:mm:ss') }"></div>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 		<div class="text-end mt-4">
 			<button class="btn waves-effect">商品を消す</button>
-			<button class="btn waves-effect">商品を追加</button>
+			<a class="btn waves-effect" href="/admin/product/add">商品を追加</a>
 		</div>
 	</div>
 </form>

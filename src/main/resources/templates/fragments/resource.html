@@ -7,4 +7,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="/js/base.js" defer></script>
+
+	<meta name="_csrf" th:content="${ _csrf.token }">
+	<meta name="_csrf_header" th:content="${ _csrf.headerName }">
 </th:block>

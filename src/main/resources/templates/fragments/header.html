@@ -17,30 +17,44 @@
 
 	<!-- dropdown contents -->
 	<ul id="customer" class="dropdown-content hoverable">
-		<li>
-			<a href="/login">
-				<span>SIGNIN</span>
-				<i class="material-icons">person</i>
-			</a>
-		</li>
-		<li>
-			<a href="/signup">
-				<span>SIGNUP</span>
-				<i class="material-icons">person_add</i>
-			</a>
-		</li>
-		<li>
-			<a href="">
-				<span>MYPAGE</span>
-				<i class="material-icons">storage</i>
-			</a>
-		</li>
-		<li>
-			<a href="">
-				<span>CART</span>
-				<i class="material-icons">shopping_basket</i>
-			</a>
-		</li>
+		<th:block th:if="${ loginUser == 'anonymousUser' }">
+			<li>
+				<a href="/login">
+					<span>SIGNIN</span>
+					<i class="material-icons">person</i>
+				</a>
+			</li>
+			<li>
+				<a href="/signup">
+					<span>SIGNUP</span>
+					<i class="material-icons">person_add</i>
+				</a>
+			</li>
+		</th:block>
+
+		<th:block th:if="${ loginUser != 'anonymousUser' }">
+			<li>
+				<form id="logoutForm" th:action="@{/logout}" method="post" hidden>
+					<button type="submit"></button>
+				</form>
+				<a href="#" onclick="document.querySelector('#logoutForm').submit(); return false;">
+					<span>LOGOUT</span>
+					<i class="material-icons">vpn_key</i>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<span>MYPAGE</span>
+					<i class="material-icons">storage</i>
+				</a>
+			</li>
+			<li>
+				<a href="/product/cart">
+					<span>CART</span>
+					<i class="material-icons">shopping_basket</i>
+				</a>
+			</li>
+		</th:block>
 		<!-- <li class="divider"></li> -->
 	</ul>
 
