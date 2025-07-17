@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import io.mj2sdev.shop.model.entity.Product;
+import lombok.RequiredArgsConstructor;
 
 @Repository
 public interface ProductRepo extends JpaRepository<Product, Long> {

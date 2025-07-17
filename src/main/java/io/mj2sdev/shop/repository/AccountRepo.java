@@ -16,7 +16,7 @@ public interface AccountRepo extends JpaRepository<Account, Long>{
 
 	Optional<Account> findByUsername(String username);
 
-	@Query("select c from Cart c join fetch c.account A join fetch c.product p where A.id = :accountId")
-	List<Cart> findUsercart(@Param("accountId") Long accountId);
+	// @Query("select c from Cart c join fetch c.account A join fetch c.product p where A.id = :accountId")
+	// List<Cart> findUsercart(@Param("accountId") Long accountId);
 	
 }

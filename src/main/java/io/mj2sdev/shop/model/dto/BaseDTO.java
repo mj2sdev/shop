@@ -1,6 +1,9 @@
 package io.mj2sdev.shop.model.dto;
 
+import java.lang.reflect.Field;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import io.mj2sdev.shop.model.entity.Base;
 import lombok.Getter;
@@ -13,10 +16,4 @@ public abstract class BaseDTO {
 	protected LocalDateTime createdAt;
 	
 	protected LocalDateTime updatedAt;
-
-	protected void Copy(Base baseEntity) {
-		this.id = baseEntity.getId();
-		this.createdAt = baseEntity.getCreatedAt();
-		this.updatedAt = baseEntity.getUpdatedAt();
-	}
 }

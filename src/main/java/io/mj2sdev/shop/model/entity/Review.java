@@ -11,12 +11,10 @@ import lombok.Setter;
 @Setter
 public class Review extends Base {
 	
-	@ManyToOne
-	@JoinColumn(name = "accountId")
+	@ManyToOne @JoinColumn
 	private Account account;
 
-	@ManyToOne
-	@JoinColumn(name = "productId")
+	@ManyToOne @JoinColumn
 	private Product product;
 
 	private String image;

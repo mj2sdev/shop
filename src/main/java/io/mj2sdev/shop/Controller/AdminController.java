@@ -26,13 +26,9 @@ public class AdminController {
 	
 	@GetMapping
 	String admin(Model model) {
-		List<Product> entities = productRepo.findAll();
-		List<ProductDTO> dtos = entities
-			.stream()
-			.map(entity -> new ProductDTO(entity))
-			.toList();
+		// List<Product> entities = productRepo.findAll();
 		
-		model.addAttribute("list", dtos);
+		// model.addAttribute("list", dtos);
 
 		return "admin";
 	}
@@ -45,10 +41,10 @@ public class AdminController {
 
 	@PostMapping("product/add")
 	public String addProduct(@ModelAttribute ProductDTO product, RedirectAttributes attributes) {
-		Product entity = product.toEntity();
-		Product saved = productRepo.save(entity);
+		// Product entity = product.toEntity();
+		// Product saved = productRepo.save(entity);
 
-		attributes.addAttribute("result", saved != null);
+		// attributes.addAttribute("result", saved != null);
 
 		return "redirect:/admin";
 	}

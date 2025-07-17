@@ -1,6 +1,7 @@
 package io.mj2sdev.shop;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -8,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 
+import io.mj2sdev.shop.model.dto.ProductDTO;
 import io.mj2sdev.shop.model.entity.Cart;
+import io.mj2sdev.shop.model.entity.Product;
 import io.mj2sdev.shop.model.entity.Review;
+import io.mj2sdev.shop.model.mapper.ProductMapper;
 import io.mj2sdev.shop.repository.AccountRepo;
 import io.mj2sdev.shop.repository.CartRepo;
 import io.mj2sdev.shop.repository.ProductRepo;
@@ -38,4 +42,17 @@ public class ProductTest {
 
 	@Autowired
 	ReviewRepo reviewRepo;
+
+	@Autowired
+	ProductMapper productMapper;
+
+	@Test
+	void werwerwer() {
+		var entity = productRepo.findById(1l).get();
+		ProductDTO dto = productMapper.toDTO(entity);
+
+		System.out.println(dto.getName());
+		
+		Assertions.assertNotNull(entity);
+	}
 }

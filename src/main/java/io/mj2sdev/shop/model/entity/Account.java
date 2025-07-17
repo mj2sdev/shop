@@ -23,8 +23,8 @@ public class Account extends Base implements UserDetails {
 	private String email;
 	private String phone;
 
-	@OneToMany(mappedBy = "account")
-	private List<Cart> carts = new ArrayList<>();
+	// @OneToMany(mappedBy = "account")
+	// private List<Cart> carts = new ArrayList<>();
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
