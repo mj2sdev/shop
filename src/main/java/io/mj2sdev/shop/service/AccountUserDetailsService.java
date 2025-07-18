@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import io.mj2sdev.shop.model.entity.Account;
+import io.mj2sdev.shop.model.mapper.AccountMapper;
 import io.mj2sdev.shop.repository.AccountRepo;
 import lombok.RequiredArgsConstructor;
 
@@ -19,13 +20,13 @@ public class AccountUserDetailsService implements UserDetailsService {
 	
 	private final AccountRepo accountRepo;
 
+	private final AccountMapper accountMapper;
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println(username);
-
 		Account account = accountRepo.findByUsername(username)
 			.orElseThrow(() -> new UsernameNotFoundException("없는 아이디 입니다."));
 			
-		return account;
+		return accountMapper.toDTO(account);
 	}
 }

@@ -17,9 +17,11 @@ public class Product extends Base {
 	private String content;
 	private String name;
 	private String thumbnail;
+
 	private Integer category;
 	private Integer originPrice;
 	private Integer salesPrice;
+	
 	private Boolean isActive;
 	private Boolean isBestSeller;
 

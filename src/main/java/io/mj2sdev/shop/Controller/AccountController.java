@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import io.mj2sdev.shop.model.dto.AccountDTO;
 import io.mj2sdev.shop.model.entity.Account;
+import io.mj2sdev.shop.model.mapper.AccountMapper;
 import io.mj2sdev.shop.repository.AccountRepo;
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class AccountController {
 
 	private final AccountRepo accountRepo;
+	
+	private final AccountMapper accountMapper;
 
 	private final PasswordEncoder passwordEncoder;
 	
@@ -30,18 +34,19 @@ public class AccountController {
 
 	@GetMapping("signup")
 	String signup(Model model) {
-		model.addAttribute("account", new Account());
+		model.addAttribute("account", new AccountDTO());
 		return "signup";
 	}
 
 	@PostMapping("signup")
-	String signup(@ModelAttribute Account account, RedirectAttributes redirectAttributes) {
-		String rawPassword = account.getPassword();
+	String signup(@ModelAttribute AccountDTO dto, RedirectAttributes redirectAttributes) {
+		String rawPassword = dto.getPassword();
 		String cryptedPassword = passwordEncoder.encode(rawPassword);
-		account.setPassword(cryptedPassword);
-		Account saved = accountRepo.save(account);
+		dto.setPassword(cryptedPassword);
+
+		Account account = accountMapper.toEntity(dto);
 		
-		boolean result = saved.getUsername() != null;
+		boolean result = accountRepo.save(account) != null;
 		redirectAttributes.addAttribute("result", result);
 		
 		return "redirect:/signup";
