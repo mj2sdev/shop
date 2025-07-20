@@ -1,13 +1,16 @@
 package io.mj2sdev.shop.model.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import io.mj2sdev.shop.model.dto.AccountDTO;
-import io.mj2sdev.shop.model.entity.Account;
+import io.mj2sdev.shop.model.entity.AccountEntity;
 
 @Mapper(componentModel = "spring")
 public interface AccountMapper {
-	public AccountDTO toDTO(Account account);
+	
+	@Mapping(target = "authorities", ignore = true)
+	AccountDTO toDTO(AccountEntity account);
 
-	public Account toEntity(AccountDTO dto);
+	AccountEntity toEntity(AccountDTO dto);
 }

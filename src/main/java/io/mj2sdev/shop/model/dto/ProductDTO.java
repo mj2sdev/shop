@@ -8,13 +8,14 @@ import lombok.Setter;
 public class ProductDTO extends BaseDTO{
 	
 	private String name;
-	private String content;
-	private String thumbnail;
+	private String discription;
+	private String imageUrl;
 
 	private Integer category;
-	private Integer price;
-	private Integer offRate;
+	private Integer originPrice;
+	private Integer salesPrice;
+	private Integer discountRate;
 
-	private Boolean isActive;
-	private Boolean isBestSeller;
+	private Boolean active;
+	private Boolean bestSeller;
 }

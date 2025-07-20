@@ -3,19 +3,21 @@ package io.mj2sdev.shop.model.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Review extends Base {
+@Table(name = "review")
+public class ReviewEntity extends BaseEntity {
 	
 	@ManyToOne @JoinColumn
-	private Account account;
+	private AccountEntity account;
 
 	@ManyToOne @JoinColumn
-	private Product product;
+	private ProductEntity product;
 
 	private String image;
 	private Integer star;

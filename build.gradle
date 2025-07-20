@@ -33,6 +33,7 @@ dependencies {
 	// implementation 'com.oracle.database.jdbc:ojdbc11:21.9.0.0'
 	implementation 'org.mariadb.jdbc:mariadb-java-client:3.3.3'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'commons-codec:commons-codec:1.18.0'
 
 	implementation 'org.mapstruct:mapstruct:1.6.3'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'

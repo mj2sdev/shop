@@ -13,9 +13,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AccountDTO extends BaseDTO implements UserDetails {
+
 	private String username;
+
 	private String password;
+
 	private String email;
+	
 	private String phone;
 
 	@Override

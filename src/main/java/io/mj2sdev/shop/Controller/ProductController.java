@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.mj2sdev.shop.model.dto.ProductDTO;
-import io.mj2sdev.shop.model.entity.Account;
-import io.mj2sdev.shop.model.entity.Cart;
-import io.mj2sdev.shop.model.entity.Product;
+import io.mj2sdev.shop.model.entity.AccountEntity;
+import io.mj2sdev.shop.model.entity.CartEntity;
+import io.mj2sdev.shop.model.entity.ProductEntity;
 import io.mj2sdev.shop.model.mapper.ProductMapper;
 import io.mj2sdev.shop.repository.AccountRepo;
 import io.mj2sdev.shop.repository.CartRepo;
@@ -40,7 +40,7 @@ public class ProductController {
 	String man(@PathVariable("gender") String gender, Model model) {
 		Integer category = gender.equals("man") ? 1 : 2;
 
-		List<Product> entities = productRepo.findAllByCategory(category);
+		List<ProductEntity> entities = productRepo.findAllByCategory(category);
 		List<ProductDTO> list = entities
 			.stream()
 			.map(productMapper::toDTO)
@@ -55,7 +55,8 @@ public class ProductController {
 	
 	@GetMapping("detail/{productId}")
 	public String detail(@PathVariable("productId") Long productId, Model model) {
-		Product entity = productRepo.findById(productId).get();
+		ProductEntity entity = productRepo.findById(productId).get();
+		var item = productMapper.toDTO(entity);
 
 		model.addAttribute("item", productMapper.toDTO(entity));
 		model.addAttribute("reviews", entity.getReviews());
@@ -64,7 +65,7 @@ public class ProductController {
 	
 	@GetMapping("cart")
 	String cart(Model model) {
-		Account account = accountRepo.findById(1l).get();
+		AccountEntity account = accountRepo.findById(1l).get();
 		// var list = accountRepo.findUsercart(account.getId());
 		// var carts = account.getCarts();
 		// model
@@ -75,7 +76,7 @@ public class ProductController {
 
 	@PostMapping("cart/add")
 	@ResponseBody
-	Boolean addCart(@AuthenticationPrincipal Account account,@RequestBody Cart cart) {
+	Boolean addCart(@AuthenticationPrincipal AccountEntity account,@RequestBody CartEntity cart) {
 		cartRepo.save(cart);
 		return true;
 	}

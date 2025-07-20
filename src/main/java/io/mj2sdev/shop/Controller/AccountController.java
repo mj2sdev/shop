@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import io.mj2sdev.shop.model.dto.AccountDTO;
-import io.mj2sdev.shop.model.entity.Account;
+import io.mj2sdev.shop.model.entity.AccountEntity;
 import io.mj2sdev.shop.model.mapper.AccountMapper;
 import io.mj2sdev.shop.repository.AccountRepo;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +44,7 @@ public class AccountController {
 		String cryptedPassword = passwordEncoder.encode(rawPassword);
 		dto.setPassword(cryptedPassword);
 
-		Account account = accountMapper.toEntity(dto);
+		AccountEntity account = accountMapper.toEntity(dto);
 		
 		boolean result = accountRepo.save(account) != null;
 		redirectAttributes.addAttribute("result", result);

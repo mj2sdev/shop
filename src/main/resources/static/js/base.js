@@ -59,6 +59,20 @@ async function uploadThumbnail(event) {
 	window.temp = thumbnailElement;
 }
 
+function previewImage(fileElement, viewElementSelector) {
+	const file = fileElement.files[0];
+	const viewElement = document.querySelector(viewElementSelector);
+	const reader = new FileReader();
+	reader.onload = () => {
+		viewElement.style.backgroundImage = `url('${ reader.result }')`
+		viewElement.hidden = false;
+	}
+
+	if (!file) return viewElement.hidden = true;
+	reader.readAsDataURL(file);
+	
+}
+
 function calProfit(event) {
 	const originPrice = document.querySelector("#originPrice").value;
 	const salesPrice = document.querySelector("#salesPrice").value;
@@ -66,7 +80,7 @@ function calProfit(event) {
 
 	if (!originPrice || !salesPrice) return;
 	
-	profitElement.value = (+originPrice - +salesPrice).toLocaleString();
+	profitElement.value = (+salesPrice - +originPrice).toLocaleString();
 }
 
 function doToast(message) {

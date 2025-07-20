@@ -1,17 +1,16 @@
 package io.mj2sdev.shop.controller;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import io.mj2sdev.shop.model.dto.ProductDTO;
-import io.mj2sdev.shop.model.entity.Product;
-import io.mj2sdev.shop.repository.ProductRepo;
+import io.mj2sdev.shop.service.ProductService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,13 +21,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class AdminController {
 
-	private final ProductRepo productRepo;
+	private final ProductService productService;
 	
 	@GetMapping
 	String admin(Model model) {
-		// List<Product> entities = productRepo.findAll();
-		
-		// model.addAttribute("list", dtos);
+		var list = productService.findAll();
+		model.addAttribute("list", list);
 
 		return "admin";
 	}
@@ -36,15 +34,17 @@ public class AdminController {
 	@GetMapping("product/add")
 	String addProduct(Model model) {
 		model.addAttribute("product", new ProductDTO());
-		return "addProduct";
+		return "admin/product/create";
 	}
 
 	@PostMapping("product/add")
-	public String addProduct(@ModelAttribute ProductDTO product, RedirectAttributes attributes) {
-		// Product entity = product.toEntity();
-		// Product saved = productRepo.save(entity);
+	public String addProduct(
+		@RequestParam("image") MultipartFile image,
+		@ModelAttribute ProductDTO product, 
+		RedirectAttributes attributes) {
 
-		// attributes.addAttribute("result", saved != null);
+		boolean result = productService.save(product, image);
+		attributes.addAttribute("result", true);
 
 		return "redirect:/admin";
 	}

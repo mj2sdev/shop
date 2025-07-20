@@ -5,14 +5,13 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import io.mj2sdev.shop.model.entity.Product;
-import lombok.RequiredArgsConstructor;
+import io.mj2sdev.shop.model.entity.ProductEntity;
 
 @Repository
-public interface ProductRepo extends JpaRepository<Product, Long> {
+public interface ProductRepo extends JpaRepository<ProductEntity, Long> {
 
-	public List<Product> findTop5ByOrderByCreatedAtDesc();
+	public List<ProductEntity> findTop5ByOrderByCreatedAtDesc();
 
-	public List<Product> findAllByCategory(Integer Category);
+	public List<ProductEntity> findAllByCategory(Integer Category);
 	
 }

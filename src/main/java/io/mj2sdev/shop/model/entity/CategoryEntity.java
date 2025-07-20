@@ -9,24 +9,21 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Table;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
-public class Category extends Base{
+@Table(name = "category")
+public class CategoryEntity extends BaseEntity{
 
 	@JoinColumn(name = "parent")
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Category parent;
+	private CategoryEntity parent;
 	private String name;
 	private String groupName;
 	
 	@OneToMany(mappedBy = "parent")
-	private List<Category> children = new ArrayList<>();
+	private List<CategoryEntity> children = new ArrayList<>();
 }
