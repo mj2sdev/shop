@@ -1,5 +1,7 @@
 package io.mj2sdev.shop.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,8 @@ import io.mj2sdev.shop.service.ProductService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -48,5 +52,12 @@ public class AdminController {
 
 		return "redirect:/admin";
 	}
+
+	@PostMapping("product/delete")
+	public String postMethodName(@RequestParam("ids") List<Long> ids) {
+		boolean result = productService.deleteAllbyIds(ids);
+		return "redirect:/admin";
+	}
+	
 	
 }

@@ -22,7 +22,10 @@ public class FileManager implements FileService {
 
 	private final FileRepo fileRepo;
 
-	private final String uploadPath = System.getProperty("user.home") + "/Documents/uploads";
+	private final String FOLDER_NAME = "uploads";
+
+	private final String UPLOAD_PATH =
+		System.getProperty("user.home") + File.separator + "Documents" + File.separator + FOLDER_NAME;
 
 	@Override
 	public List<FileEntity> save(List<MultipartFile> files) {
@@ -55,8 +58,8 @@ public class FileManager implements FileService {
 			.hashedName(hashedName)
 			.contentType(contentType)
 			.extension(extension)
-			.path(uploadPath + File.pathSeparator + hashedName)
-			.url("")
+			.path(UPLOAD_PATH + File.separator + hashedName)
+			.url("/" + FOLDER_NAME + "/" + hashedName)
 			.size(file.getSize())
 			.build();
 			
@@ -70,7 +73,7 @@ public class FileManager implements FileService {
 
 	private void saveFile(MultipartFile file, String filename) {
 		try {
-			File dest = new File(uploadPath, filename);
+			File dest = new File(UPLOAD_PATH, filename);
 			dest.getParentFile().mkdirs();
 			file.transferTo(dest);
 		} catch (IOException e) {

@@ -5,7 +5,7 @@
 </h2>
 
 <!-- table template -->
-<form class="card hoverable">
+<form class="card hoverable" th:action="@{/admin/product/delete}" method="post">
 	<div class="card-content">
 		<table class="striped highlight">
 			<thead>
@@ -22,7 +22,7 @@
 					<td>
 						<p>
 							<label>
-								<input type="checkbox" th:value="${ item.id }" />
+								<input type="checkbox" name="ids" th:value="${ item.id }" />
 								<span></span>
 							</label>
 						</p>
@@ -47,7 +47,7 @@
 			</tbody>
 		</table>
 		<div class="text-end mt-4">
-			<button class="btn waves-effect">商品を消す</button>
+			<button type="submit" class="btn waves-effect">商品を消す</button>
 			<a class="btn waves-effect" href="/admin/product/add">商品を追加</a>
 		</div>
 	</div>

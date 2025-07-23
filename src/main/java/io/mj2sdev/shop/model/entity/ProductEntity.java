@@ -3,6 +3,8 @@ package io.mj2sdev.shop.model.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.SQLRestriction;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Lob;
@@ -18,10 +20,11 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "product")
 @SuperBuilder
 @NoArgsConstructor
+@SQLRestriction("deleted = false")
 public class ProductEntity extends BaseEntity {
 
 	@Lob
-	private String discription;
+	private String description;
 	private String name;
 
 	private Integer category;

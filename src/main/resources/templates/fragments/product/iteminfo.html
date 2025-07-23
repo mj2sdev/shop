@@ -80,10 +80,12 @@
 	</div>
 
 	<div id="info" class="col s12">
-		<img class="w-full" th:src="@{ item.imageUrl }" th:value="${ item.imageUrl}">
+		<div class="text-center" th:utext="${ item.description }"></div>
+		<!-- <img class="w-full" th:text="${ item.description }"> -->
 	</div>
 
 	<div id="review" class="col s12">
+		<div class="text-center" th:if="${ reviews.size() == 0 }" th:text="'후기가 없습니다.'"></div>
 		<div class="card hoverable" th:each="review : ${ reviews }">
 			<div class="card-content">
 				<p th:text="${ review.id }"></p>

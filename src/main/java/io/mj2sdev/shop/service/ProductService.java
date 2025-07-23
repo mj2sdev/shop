@@ -17,4 +17,6 @@ public interface ProductService {
 	boolean delete(Long id);
 
 	ProductDTO findById(Long id);
+
+	boolean deleteAllbyIds(List<Long> ids);
 }

@@ -8,7 +8,7 @@ import lombok.Setter;
 public class ProductDTO extends BaseDTO{
 	
 	private String name;
-	private String discription;
+	private String description;
 	private String imageUrl;
 
 	private Integer category;

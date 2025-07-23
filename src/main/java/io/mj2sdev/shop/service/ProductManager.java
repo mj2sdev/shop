@@ -3,6 +3,7 @@ package io.mj2sdev.shop.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.mj2sdev.shop.model.dto.ProductDTO;
@@ -57,15 +58,23 @@ public class ProductManager implements ProductService {
 	}
 
 	@Override
-	public boolean delete(Long id) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'delete'");
-	}
-
-	@Override
 	public ProductDTO findById(Long id) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'findById'");
+	}
+
+	@Override
+	@Transactional
+	public boolean deleteAllbyIds(List<Long> ids) {
+		ids.forEach(this::delete);
+		return true;
+	}
+
+	@Override
+	public boolean delete(Long id) {
+		ProductEntity entity = productRepo.getReferenceById(id);
+		entity.delete();
+		return true;
 	}
 	
 }

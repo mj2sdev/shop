@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.mj2sdev.shop.model.dto.AccountDTO;
 import io.mj2sdev.shop.model.dto.ProductDTO;
 import io.mj2sdev.shop.model.entity.AccountEntity;
 import io.mj2sdev.shop.model.entity.CartEntity;
@@ -64,13 +65,8 @@ public class ProductController {
 	}
 	
 	@GetMapping("cart")
-	String cart(Model model) {
-		AccountEntity account = accountRepo.findById(1l).get();
-		// var list = accountRepo.findUsercart(account.getId());
-		// var carts = account.getCarts();
-		// model
-		// 	.addAttribute("list", list);
-			// .addAttribute("carts", carts);
+	String cart(Model model, @AuthenticationPrincipal AccountDTO account) {
+		System.out.println(account.getUsername());
 		return "cart";
 	}
 

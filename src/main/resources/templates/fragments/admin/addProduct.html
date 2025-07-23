@@ -14,8 +14,7 @@
       <div class="input-field col s6">
         <input 
         type="text" 
-        class="validate" 
-        id="name" 
+        class="validate"
         placeholder="name" 
         th:field="*{name}" 
         required>
@@ -35,8 +34,7 @@
         <input
         class="validate"
         type="number" 
-        name="originPrice" 
-        id="originPrice"
+        th:field="*{originPrice}"
         min="0"
         placeholder="1,000"
         onkeyup="calProfit(event)"
@@ -48,8 +46,7 @@
         <input 
         class="validate"
         type="number" 
-        name="salesPrice" 
-        id="salesPrice"
+        th:field="*{salesPrice}" 
         min="0"
         placeholder="1,000"
         onkeyup="calProfit(event)"
@@ -70,10 +67,10 @@
       
       <div class="col s12">
         <div
-          data-name="discription"
+          data-name="description"
           class="h-[20rem] p-4 quill">
         </div>
-        <input type="hidden" th:field="*{discription}" name="discription">
+        <input type="hidden" th:field="*{description}">
       </div>
     
     <div class="col s12">

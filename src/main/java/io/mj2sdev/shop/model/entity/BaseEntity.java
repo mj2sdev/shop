@@ -32,4 +32,8 @@ public abstract class BaseEntity {
 
 	@LastModifiedDate
 	private LocalDateTime updatedAt;
+
+	public void delete() {
+		this.deleted = true;
+	}
 }
