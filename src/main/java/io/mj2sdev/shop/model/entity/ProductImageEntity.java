@@ -23,4 +23,8 @@ public class ProductImageEntity extends BaseEntity {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private FileEntity image;
+
+	public void setImage(FileEntity fileEntity) {
+		this.image = fileEntity;
+	}
 }

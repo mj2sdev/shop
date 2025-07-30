@@ -6,6 +6,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -25,5 +26,8 @@ public class CartItemEntity extends BaseEntity {
 	
 	private Integer quantity;
 
-	private Long priceSnapshot;
+	public CartItemEntity mergeQuantity(Integer quantity) { 
+		this.quantity += quantity;
+		return this;
+	}
 }

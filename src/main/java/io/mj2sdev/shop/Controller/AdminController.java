@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -48,7 +50,7 @@ public class AdminController {
 		RedirectAttributes attributes) {
 
 		boolean result = productService.save(product, image);
-		attributes.addAttribute("result", true);
+		attributes.addAttribute("result", result);
 
 		return "redirect:/admin";
 	}
@@ -59,5 +61,22 @@ public class AdminController {
 		return "redirect:/admin";
 	}
 	
+	@GetMapping("product/{id}")
+	String updateProduct(@PathVariable("id") Long id, Model model) {
+		var product = productService.findById(id);
+		model.addAttribute("product", product);
+		
+		return "admin/product/update";
+	}
+
+	@PostMapping("product/{id}")
+	String postMethodName(
+			@PathVariable("id") Long id, 
+			ProductDTO dto,
+			RedirectAttributes attributes) {
+		dto.setId(id);
+		boolean result = productService.update(dto);
+		return "redirect:/admin";
+	}
 	
 }

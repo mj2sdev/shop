@@ -1,5 +1,7 @@
 package io.mj2sdev.shop.model.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,4 +20,5 @@ public class ProductDTO extends BaseDTO{
 
 	private Boolean active;
 	private Boolean bestSeller;
+	private MultipartFile image;
 }

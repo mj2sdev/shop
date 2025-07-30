@@ -37,8 +37,24 @@ function passwordPattern(element) {
 }
 
 document.querySelectorAll(".quill").forEach(item => {
+	const tollbarOptions = [
+		["bold", "italic", "underline", "strike"],
+		["blockquote", "code-block"],
+		[{ header: 1 }, { header: 2 }],
+		[{ list: "ordered" }, { list: "bullet" }],
+		[{ script: "sub" }, { script: "super" }],
+		[{ indent: "-1" }, { indent: "+1" }],
+		[{ direction: "rtl" }],
+		[{ size: ["small", false, "large", "huge"] }],
+		[{ header: [1, 2, 3, 4, 5, 6, false] }],
+		[{ color: [] }, { background: [] }],
+		[{ font: [] }],
+		[{ align: [] }],
+		["clean"],
+		["link", "image", "video"],
+	]
 	const editors = window.editors || [];
-	const quill = new Quill(item, { theme: "snow" });
+	const quill = new Quill(item, { theme: "snow", modules: { toolbar: tollbarOptions } });
 	const { root } = quill;
 	const { name } = item.dataset;
 	const quillInputElement = document.querySelector(`[name=${name}]`);
@@ -50,21 +66,13 @@ document.querySelectorAll(".quill").forEach(item => {
 	}
 })
 
-async function uploadThumbnail(event) {
-	const { target } = event;
-	const { value } = target;
-	const thumbnailElement = document.querySelector(".thumbnail");
-	
-	thumbnailElement.style.backgroundImage = `url('${image}')`;
-	window.temp = thumbnailElement;
-}
-
 function previewImage(fileElement, viewElementSelector) {
 	const file = fileElement.files[0];
 	const viewElement = document.querySelector(viewElementSelector);
 	const reader = new FileReader();
 	reader.onload = () => {
-		viewElement.style.backgroundImage = `url('${ reader.result }')`
+		viewElement.setAttribute("src", reader.result);
+		// viewElement.style.backgroundImage = `url('${ reader.result }')`
 		viewElement.hidden = false;
 	}
 
@@ -101,7 +109,7 @@ function getCsrfToken() {
 
 async function addCart() {
 	const productId = +document.querySelector("#id").innerHTML;
-	const amount = +document.querySelector("#count").value;
+	const quantity = +document.querySelector("#count").value;
 	const csrf = getCsrfToken();
 	
 	const response = await fetch("/product/cart/add", {
@@ -110,8 +118,28 @@ async function addCart() {
 			"Content-Type": "application/json",
 			[csrf.headerName]: csrf.token,
 		},
-		body: JSON.stringify({ "product": { id: productId }, amount }),
+		body: JSON.stringify({ productId, quantity }),
 	})
 
 	console.log(await response.json());
+}
+
+function deleteProductProcess(event) {
+	const formElement = event.target;
+	const { ids } = formElement;
+	if (!ids) return event.preventDefault();
+
+	const value = [...ids]
+		.map(id => id.checked ? id.value : '')
+		.reduce((acc, value) => acc + value);
+	
+	const firstId = ids[0];
+	console.table(value)
+	if (!value) {
+		firstId.setAttribute("required", "");
+		formElement.reportValidity();
+		event.preventDefault();
+	} else {
+		firstId.removeAttribute("required");
+	}
 }

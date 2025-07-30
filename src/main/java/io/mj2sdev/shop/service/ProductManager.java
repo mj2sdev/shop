@@ -13,6 +13,7 @@ import io.mj2sdev.shop.model.entity.ProductImageEntity;
 import io.mj2sdev.shop.model.mapper.ProductMapper;
 import io.mj2sdev.shop.repository.ProductFileRepo;
 import io.mj2sdev.shop.repository.ProductRepo;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -52,15 +53,24 @@ public class ProductManager implements ProductService {
 	}
 
 	@Override
+	@Transactional
 	public boolean update(ProductDTO dto) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'update'");
+		ProductEntity product = productRepo.getReferenceById(dto.getId());
+		ProductImageEntity productImageEntity = product.getProductImage();
+
+		if (!dto.getImage().isEmpty()) {
+			FileEntity fileEntity = fileService.save(dto.getImage());
+			productImageEntity.setImage(fileEntity);
+		}
+		product.update(dto);
+
+		return true;
 	}
 
 	@Override
 	public ProductDTO findById(Long id) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'findById'");
+		var entity = productRepo.findById(id).get();
+		return productMapper.toDTO(entity);
 	}
 
 	@Override

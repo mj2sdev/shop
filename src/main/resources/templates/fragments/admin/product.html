@@ -5,7 +5,7 @@
 </h2>
 
 <!-- table template -->
-<form class="card hoverable" th:action="@{/admin/product/delete}" method="post">
+<form class="card hoverable" th:action="@{/admin/product/delete}" method="post" onsubmit="deleteProductProcess(event)">
 	<div class="card-content">
 		<table class="striped highlight">
 			<thead>
@@ -22,7 +22,8 @@
 					<td>
 						<p>
 							<label>
-								<input type="checkbox" name="ids" th:value="${ item.id }" />
+								<input type="checkbox" name="ids" th:value="${ item.id }"
+									title="한개 이상 체크하세요" />
 								<span></span>
 							</label>
 						</p>
