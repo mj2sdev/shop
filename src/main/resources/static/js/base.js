@@ -143,3 +143,11 @@ function deleteProductProcess(event) {
 		firstId.removeAttribute("required");
 	}
 }
+
+const message = document.querySelector("meta[name=message]").content;
+if (message) {
+	M.toast({
+		html: message,
+		classes: "rounded",
+	})
+}

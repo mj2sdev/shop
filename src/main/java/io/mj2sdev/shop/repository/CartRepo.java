@@ -7,6 +7,5 @@ import io.mj2sdev.shop.model.entity.CartEntity;
 
 @Repository
 public interface CartRepo extends JpaRepository<CartEntity, Long> {
-	
-	// Account findAllByAccountId(Account accountId);
+
 }

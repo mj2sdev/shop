@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -20,11 +21,17 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class CartEntity extends BaseEntity {
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "account_id")
 	private AccountEntity account;
 	
 	@OneToMany(mappedBy = "cart")
 	@Builder.Default
 	private List<CartItemEntity> cartItems = new ArrayList<>();
+
+	public CartEntity addCartItem(CartItemEntity cartItem) {
+		this.cartItems.add(cartItem);
+		cartItem.setCart(this);
+		return this;
+	}
 }

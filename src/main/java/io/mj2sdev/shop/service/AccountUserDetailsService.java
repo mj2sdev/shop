@@ -22,7 +22,7 @@ public class AccountUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		AccountEntity account = accountRepo.findByUsername(username)
 			.orElseThrow(() -> new UsernameNotFoundException("없는 아이디 입니다."));
-			
+		System.out.println(account.getId());
 		return accountMapper.toDTO(account);
 	}
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/base}">
+<th:block layout:fragment="content">
+	<main>
+		<div class="container">
+			<div class="row my-8">
+				<div class="col s12 l4 offset-l4">
+					<div class="card">
+						<div class="card-content">
+							<span class="card-title center-align">정보 수정</span>
+							<form th:action="@{/mypage}" method="post">
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">account_circle</i>
+										<input id="username" type="text" name="username"
+											th:value="${account != null ? account.username : ''}">
+										<label for="username">Name</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">email</i>
+										<input id="email" type="email" name="email" th:field="*{account.email}" readonly="readonly">
+										<label for="email">Email</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">lock_outline</i>
+										<input id="current_password" type="password" name="current_password" th:field="*{account.password}">
+										<label for="current_password">Current Password</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">lock</i>
+										<input id="new_password" type="password" name="new_password">
+										<label for="new_password">New Password</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">phone</i>
+										<input id="phone" type="text" th:field="*{account.phone}" />
+										<label for="address">phone</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col s12 center-align">
+										<button class="btn waves-effect waves-light" type="submit" name="action">
+											<span>프로필 수정</span>
+											<i class="material-icons right">send</i>
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</th:block>
+
+</html>

@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.mj2sdev.shop.model.dto.AccountDTO;
-import io.mj2sdev.shop.model.dto.CartDTO;
+import io.mj2sdev.shop.model.dto.CartItemDTO;
 import io.mj2sdev.shop.model.dto.ProductDTO;
+import io.mj2sdev.shop.model.dto.ResponseDTO;
 import io.mj2sdev.shop.model.entity.ProductEntity;
 import io.mj2sdev.shop.model.mapper.ProductMapper;
 import io.mj2sdev.shop.repository.ProductRepo;
 import io.mj2sdev.shop.service.CartService;
+import io.mj2sdev.shop.service.ProductService;
+import io.mj2sdev.shop.service.ReviewService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,22 +30,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("product")
 @RequiredArgsConstructor
 public class ProductController {
-	
-	private final ProductRepo productRepo;
-	
-	private final ProductMapper productMapper;
+
+	private final ProductService productService;
+
+	private final ReviewService reviewService;
 
 	private final CartService cartService;
 
 	@GetMapping("{gender:man|woman}")
-	String man(@PathVariable String gender, Model model) {
+	String man(@PathVariable("gender") String gender, Model model) {
 		Integer category = gender.equals("man") ? 1 : 2;
 
-		List<ProductEntity> entities = productRepo.findAllByCategory(category);
-		List<ProductDTO> list = entities
-			.stream()
-			.map(productMapper::toDTO)
-			.toList();
+		/**
+		 * TODO: 카테고리 구현 후 그에맞는 상품 불러오도록 연동해야함.
+		 */
+		var list = productService.findAll();
 
 		model
 			.addAttribute("list", list)
@@ -52,26 +55,35 @@ public class ProductController {
 	
 	@GetMapping("detail/{id}")
 	String detail(@PathVariable("id") Long productId, Model model) {
-		ProductEntity entity = productRepo.findById(productId).get();
-		var item = productMapper.toDTO(entity);
+		var product = productService.findById(productId);
+		var reviews = reviewService.findAllByProductId(productId);
 
-		model.addAttribute("item", productMapper.toDTO(entity));
-		model.addAttribute("reviews", entity.getReviews());
+		model.addAttribute("item", product);
+		model.addAttribute("reviews", reviews);
 		return "detail";
 	}
 	
 	@GetMapping("cart")
 	void cart(Model model, @AuthenticationPrincipal AccountDTO account) {
-		System.out.println(account.getUsername());
+		List<CartItemDTO> list = cartService.findAllByAccount(account);
+		Integer deliveryPrice = 3000;
+		Integer totalPrice = list.stream()
+			.map(item -> item.getProduct().getSalesPrice())
+			.reduce(0, Integer::sum);
+			
+		model
+			.addAttribute("list", list)
+			.addAttribute("deliveryPrice", deliveryPrice)
+			.addAttribute("totalPrice", totalPrice);
 	}
 
 	@PostMapping("cart/add")
 	@ResponseBody
-	boolean addCart(
+	ResponseDTO addCart(
 		@AuthenticationPrincipal AccountDTO account, 
-		@RequestBody CartDTO cartItem) {
-		boolean result = cartService.addProductInCart(account, cartItem);
+		@Valid @RequestBody CartItemDTO cartItem) {
+		cartService.addProductInCart(account, cartItem);
 
-		return result;
+		return ResponseDTO.of("매우 성공적인 장바구니 상품슛 이었습니다.");
 	}
 }
