@@ -10,4 +10,8 @@ public interface CartService {
 	void addProductInCart(AccountDTO account, CartItemDTO dto);
 
 	List<CartItemDTO> findAllByAccount(AccountDTO account);
+
+	void deleteItemInCart(Long itemId);
+
+	void changeItemQuantity(CartItemDTO itemDto);
 }

@@ -8,12 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import io.mj2sdev.shop.exception.AccountNotFoundException;
 import io.mj2sdev.shop.model.dto.AccountDTO;
-import io.mj2sdev.shop.model.dto.CartDTO;
 import io.mj2sdev.shop.model.dto.CartItemDTO;
-import io.mj2sdev.shop.model.entity.AccountEntity;
 import io.mj2sdev.shop.model.entity.CartEntity;
 import io.mj2sdev.shop.model.entity.CartItemEntity;
-import io.mj2sdev.shop.model.mapper.CartItemMapper;
 import io.mj2sdev.shop.model.mapper.CartMapper;
 import io.mj2sdev.shop.repository.AccountRepo;
 import io.mj2sdev.shop.repository.CartItemRepo;
@@ -25,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CartManager implements CartService {
-
+	
 	private final AccountRepo accountRepo;
 
 	private final ProductRepo productRepo;
@@ -83,5 +80,17 @@ public class CartManager implements CartService {
 			});
 
 		return cartMapper.toDTO(cart).getCartItems();
+	}
+
+	@Override
+	public void deleteItemInCart(Long itemId) {
+		cartItemRepo.deleteById(itemId);
+	}
+
+	@Override
+	@Transactional
+	public void changeItemQuantity(CartItemDTO cartItemDto) {
+		CartItemEntity entity = cartItemRepo.findById(cartItemDto.getId()).get();
+		entity.setQuantity(cartItemDto.getQuantity());
 	}
 }
