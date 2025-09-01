@@ -108,6 +108,8 @@ function getCsrfToken() {
 }
 
 async function addCart() {
+	if (!confirm("상품을 장바구니에 추가하시겠습니까?")) return;
+
 	const productId = +document.querySelector("#id").innerHTML;
 	const quantity = +document.querySelector("#count").value;
 	const csrf = getCsrfToken();
@@ -121,7 +123,11 @@ async function addCart() {
 		body: JSON.stringify({ productId, quantity }),
 	})
 
-	console.log(await response.json());
+	const result = await response.json();
+	if (result.result) {
+		if (!confirm(result.message + "\n장바구니로 바로 가시겠습니까?")) return;
+		location.href = "/product/cart";
+	}
 }
 
 function deleteProductProcess(event) {
