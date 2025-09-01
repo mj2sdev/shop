@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CartItemDTO {
+public class CartItemDTO extends BaseDTO {
 	
 	@Min(value = 1, message = "수량은 1 이상이어야 할 겁니다.")
 	private Integer quantity;
