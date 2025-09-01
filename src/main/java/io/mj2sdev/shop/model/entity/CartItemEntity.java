@@ -24,6 +24,7 @@ public class CartItemEntity extends BaseEntity {
 	@OneToOne(fetch = FetchType.LAZY)
 	private ProductEntity product;
 	
+	@Setter
 	private Integer quantity;
 
 	public CartItemEntity mergeQuantity(Integer quantity) { 
