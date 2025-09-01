@@ -4,6 +4,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.mj2sdev.shop.exception.AccountNotFoundException;
 import io.mj2sdev.shop.model.dto.AccountDTO;
 import io.mj2sdev.shop.model.dto.ResponseDTO;
 import io.mj2sdev.shop.model.entity.AccountEntity;
@@ -80,6 +81,12 @@ public class AccountManager implements AccountService {
 			.message(message)
 			.result(result)
 			.build();
+	}
+
+	@Override
+	public AccountEntity findAccountByPrincipal(AccountDTO accountDto) {
+		return accountRepo.findByUsername(accountDto.getUsername())
+			.orElseThrow(() -> new AccountNotFoundException(accountDto.getUsername()));
 	}
 	
 }

@@ -86,4 +86,20 @@ public class ProductController {
 
 		return ResponseDTO.of("매우 성공적인 장바구니 상품슛 이었습니다.");
 	}
+
+	@PostMapping("cart/delete/{id}")
+	@ResponseBody
+	ResponseDTO deleteProductInCart(@PathVariable("id") Long itemId) {
+		cartService.deleteItemInCart(itemId);
+
+		return ResponseDTO.of("매우 성공적인 상품 폐기 입니다.");
+	}
+
+	@PostMapping("cart/change")
+	@ResponseBody
+	ResponseDTO changeItemQuantity(@RequestBody CartItemDTO itemDto) {
+		cartService.changeItemQuantity(itemDto);
+
+		return ResponseDTO.of("매우 성공적인 상품갯수 변경이었다.");
+	}
 }
