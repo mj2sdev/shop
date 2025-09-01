@@ -5,9 +5,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/base}">
 <head>
-	<th:block layout:fragment="head">
-		<script src="/js/cart.js"></script>
-	</th:block>
+	<script defer src="/js/cart.js"></script>
 </head>
 
 <body>
@@ -52,14 +50,17 @@
 												원</td>
 											<td class="center-align">
 												<div class="input-field w-[80px] mx-auto my-0">
-													<input type="number" min="1" class="text-center" th:value="${ item.quantity }">
+													<input type="number" min="1" class="text-center" th:value="${ item.quantity }" th:data-id="${ item.id }" @change="changeQuantity()">
 												</div>
 											</td>
 											<td
 												th:text="${ #numbers.formatDecimal(item.quantity * item.product.salesPrice, 0, 'COMMA', 0, 'POINT') } + ' 원'">
 											</td>
 											<td>
-												<a href="javascript:" class="btn-floating waves-effect waves-light red">
+												<a
+													th:data-id="${ item.id }"
+													@click="dropProductInCart()"
+													class="btn-floating waves-effect waves-light red">
 													<i class="material-icons">delete</i>
 												</a>
 											</td>
